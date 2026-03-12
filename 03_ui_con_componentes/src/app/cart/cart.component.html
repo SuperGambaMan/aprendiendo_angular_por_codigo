@@ -1,0 +1,20 @@
+<h2>Carrito</h2>
+
+<ul>
+  @for (item of items(); track item.quantity && item.product.id) {
+  <li class="cart-item">
+    @switch (item.product.title) {
+      @case ('Keyboard') { ⌨️ }
+      @case ('Microphone') { 🎙️ }
+      @default { 🏷️ }
+    }
+    {{ item.product.title }} — Cantidad: {{ item.quantity }}
+  </li>
+  }
+</ul>
+
+@if (items().length === 0) {
+  <p>
+    El carrito está vacío.
+  </p>
+}

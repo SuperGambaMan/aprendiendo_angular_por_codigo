@@ -4,7 +4,7 @@
 
 <ul class="pill-group">
   @for (product of products; track product.id) {
-    <li class="pill" (click)="selectedProduct = product">
+    <li class="pill" (click)="onselect(product)">
       @switch (product.title) {
         @case ('Keyboard') { ⌨️ }
         @case ('Microphone') { 🎙️ }
@@ -21,3 +21,5 @@
   [product]="selectedProduct"
   (added)="onAdded()"
 ></app-product-detail>
+
+<app-cart [items]="cartItems"></app-cart>

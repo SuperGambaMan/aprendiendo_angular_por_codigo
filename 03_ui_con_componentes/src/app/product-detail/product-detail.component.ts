@@ -8,10 +8,13 @@ import { Product } from '../product';
   styleUrl: './product-detail.component.css'
 })
 export class ProductDetailComponent {
-  product = input<Product>();
-  added = output();
+  product = input<Product | null>(null);
+  added = output<Product>();
 
   addToCart() {
-    this.added.emit();
+    const currentProduct = this.product();
+    if (currentProduct) {
+      this.added.emit(currentProduct!);
+    }
   }
 }
