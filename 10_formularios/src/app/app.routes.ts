@@ -3,9 +3,12 @@ import { CartComponent } from './cart/cart.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductCreateComponent } from './product-create/product-create.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { CategoryListComponent} from './category-list/category-list.component';
+import { CategoryCreateComponent} from './category-create/category-create.component';
 import { authGuard } from './auth.guard';
 import { checkoutGuard } from './checkout.guard';
 import { productsResolver } from './products.resolver';
+import {categoriesResolver} from './categories.resolver';
 
 export const routes: Routes = [
   {
@@ -15,6 +18,14 @@ export const routes: Routes = [
       products: productsResolver
     }
   },
+  {
+    path: 'products/categories',
+    component: CategoryListComponent,
+    resolve: {
+      categories: categoriesResolver
+    }
+  },
+  { path: 'products/categories/new', component: CategoryCreateComponent },
   { path: 'products/new', component: ProductCreateComponent },
   { path: 'products/:id', component: ProductDetailComponent },
   {
@@ -27,7 +38,7 @@ export const routes: Routes = [
     path: 'user',
     loadChildren: () => import('./user.routes'),
     canMatch: [authGuard]
-  },  
+  },
   { path: '', redirectTo: 'products', pathMatch: 'full' },
   { path: '**', redirectTo: 'products' }
 ];

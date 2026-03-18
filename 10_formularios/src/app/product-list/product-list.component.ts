@@ -1,8 +1,8 @@
-import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, ActivatedRoute } from '@angular/router';
+import { AsyncPipe } from '@angular/common';
 import { Observable, switchMap, of } from 'rxjs';
 import { Product } from '../product';
+import { RouterLink, ActivatedRoute } from '@angular/router';
 import { SortPipe } from '../sort.pipe';
 
 @Component({
@@ -26,7 +26,9 @@ export class ProductListComponent implements OnInit {
 
   private getProducts() {
     this.products$ = this.route.data.pipe(
-      switchMap(data => of(data['products']))
+      switchMap(data => {
+        return of(data['products']);
+      })
     );
   }
 }

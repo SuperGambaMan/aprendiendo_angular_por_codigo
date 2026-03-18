@@ -1,0 +1,16 @@
+<h1>Add new category</h1>
+<form [formGroup]="categoryForm!" (ngSubmit)="createCategory()">
+  <div>
+    <label for="title">Title</label>
+    <input id="title" formControlName="title" required />
+    @if (categoryForm.controls.title.touched && categoryForm.controls.title.hasError('required')) {
+      <span class="help-text">Title is required</span>
+    }
+    @if (categoryForm.controls.title.touched && categoryForm.controls.title.hasError('minlength')) {
+      <span class="help-text">Title should be minimum 3 characters length</span>
+    }
+  </div>
+  <div>
+    <button type="submit" [disabled]="categoryForm.invalid">Create</button>
+  </div>
+</form>
