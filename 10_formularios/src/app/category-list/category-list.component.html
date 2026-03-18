@@ -1,0 +1,22 @@
+@let categories = this.categories;
+
+<div class="category-list">
+  <div class="caption">
+    <h2>Categorías ({{ categories.length }})</h2>
+    <button (click)="toggleCreate()">
+      {{ showCreate ? 'Ocultar formulario' : 'Crear categoría' }}
+    </button>
+  </div>
+
+  <ul class="pill-group">
+    @for (category of categories; track category) {
+      <li class="pill">🏷️ {{ category }}</li>
+    } @empty {
+      <p>No hay categorías.</p>
+    }
+  </ul>
+
+  @if (showCreate) {
+    <app-category-create (categoryCreated)="onCategoryCreated($event)"></app-category-create>
+  }
+</div>
