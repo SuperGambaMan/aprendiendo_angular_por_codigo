@@ -9,14 +9,21 @@ import { APP_SETTINGS } from './app.settings';
 })
 export class ProductsService {
   private products: Product[] = [];
+
+  //inject(APP_SETTINGS).apiUrl == BASE_URL
   private productsUrl = inject(APP_SETTINGS).apiUrl + '/products';
-  
+
   constructor(private http: HttpClient) { }
 
   getProducts(): Observable<Product[]> {
-    const options = new HttpParams().set('limit', 10);
+    // HttpParams es un parámetro de URL (query param, lo que va detrás de "?")
+    // http://localhost:3000/products?limit=10
+    const params = new HttpParams().set('limit', 10);
+
+    //httpClient - cliente de API sobre http para comunicar con la API o Backend
+    //Envía un verbo GET a la URL de productsUrl
     return this.http.get<Product[]>(this.productsUrl, {
-      params: options
+      params: params // Podría ser solo params
     }).pipe(map(products => {
       this.products = products;
       return products;
@@ -36,7 +43,7 @@ export class ProductsService {
       })
     );
   }
-  
+
   updateProduct(id: number, price: number): Observable<Product> {
     return this.http.patch<Product>(`${this.productsUrl}/${id}`, {
       price
@@ -56,6 +63,6 @@ export class ProductsService {
         this.products.splice(index, 1);
       })
     );
-  }  
-  
+  }
+
 }

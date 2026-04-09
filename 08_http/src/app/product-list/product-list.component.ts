@@ -21,9 +21,10 @@ import { ProductCreateComponent } from '../product-create/product-create.compone
 export class ProductListComponent implements OnInit {
   products$: Observable<Product[]> | undefined;
   selectedProduct: Product | undefined;
+  ProductComp   : Product[] = [];
 
   constructor(private productService: ProductsService) {}
-  
+
   onAdded() {
     alert(`${this.selectedProduct?.title} added to the cart!`);
   }
@@ -34,5 +35,26 @@ export class ProductListComponent implements OnInit {
 
   private getProducts() {
     this.products$ = this.productService.getProducts();
+
+    // este subcribe es el consumidor del observable
+    this.products$.subscribe( (products: Product[]) => {
+      this.ProductComp = products;
+    });
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
