@@ -1,0 +1,35 @@
+<form [formGroup]="userIdForm" (ngSubmit)="fetchCarts()">
+  <label for="userId">User ID:</label>
+  <input id="userId" type="number" formControlName="userId" min="1" />
+  <button type="submit">Buscar Carts</button>
+  <button type="button" (click)="createCart()">Crear Cart</button>
+</form>
+
+@if (loading) {
+  <div>Cargando...</div>
+}
+@if (error) {
+  <div>{{ error }}</div>
+}
+@if (carts.length > 0) {
+  <h3>Carts del usuario</h3>
+  <ul>
+    @for (cart of carts; track cart.id) {
+      <li>
+        Cart #{{ cart.id }} ({{ cart.date | date:'shortDate' }})
+        <button (click)="loadCartProducts(cart)">Ver productos</button>
+      </li>
+    }
+  </ul>
+}
+
+@if (selectedCartProducts.length > 0) {
+  <h4>Productos del Cart seleccionado</h4>
+  <ul>
+    @for (product of selectedCartProducts; track product.id) {
+      <li>
+        <strong>{{ product.title }}</strong> - {{ product.description }}
+      </li>
+    }
+  </ul>
+}

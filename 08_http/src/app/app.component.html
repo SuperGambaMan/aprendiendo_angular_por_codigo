@@ -4,8 +4,14 @@
 </header>
 <main class="main">
   <div class="content">
-    <app-product-list></app-product-list>
+    <div class="main-content">
+      <div class="product-list">
+        <app-product-list></app-product-list>
+      </div>
+      <div class="cart-panel">
+        <app-cart></app-cart>
+      </div>
+    </div>
   </div>
 </main>
 <footer appCopyright> - v{{ settings.version }}</footer>
-<router-outlet />
